@@ -5,6 +5,7 @@ import 'dotenv/config'
 import { RequestHandler } from 'express'
 import { analytics } from './analytics'
 import { queueSavePageJob } from './job'
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 
 interface UserConfig {
   id: string
@@ -56,6 +57,14 @@ interface FetchResult {
   content?: string
   contentType?: string
 }
+const S3 = new S3Client({
+  region: 'auto',
+  endpoint: process.env.CF_R2_ENDPOINT as string,
+  credentials: {
+    accessKeyId: process.env.CF_R2_ACCESS_KEY_ID as string,
+    secretAccessKey: process.env.CF_R2_SECRET_ACCESS_KEY as string,
+  },
+})
 
 const storage = process.env.GCS_UPLOAD_SA_KEY_FILE_PATH
   ? new Storage({ keyFilename: process.env.GCS_UPLOAD_SA_KEY_FILE_PATH })
@@ -63,10 +72,18 @@ const storage = process.env.GCS_UPLOAD_SA_KEY_FILE_PATH
 const bucketName = process.env.GCS_UPLOAD_BUCKET || 'omnivore-files'
 
 const uploadToBucket = async (filePath: string, data: string) => {
-  await storage
-    .bucket(bucketName)
-    .file(filePath)
-    .save(data, { public: false, timeout: 30000 })
+  await S3.send(
+    new PutObjectCommand({
+      Bucket: bucketName,
+      Key: filePath,
+      Body: data,
+      ACL: 'private',
+    })
+  )
+  // await storage
+  //   .bucket(bucketName)
+  //   .file(filePath)
+  //   .save(data, { public: false, timeout: 30000 })
 }
 
 const uploadOriginalContent = async (
@@ -78,9 +95,11 @@ const uploadOriginalContent = async (
     users.map(async (user) => {
       const filePath = `content/${user.id}/${user.libraryItemId}.${savedTimestamp}.original`
 
+      console.log(`Original content uploading to ${filePath}`)
+
       await uploadToBucket(filePath, content)
 
-      console.log(`Original content uploaded to ${filePath}`)
+      console.log(`Original content uploaded`)
     })
   )
 }

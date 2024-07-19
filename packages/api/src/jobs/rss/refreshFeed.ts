@@ -95,9 +95,9 @@ export const isOldItem = (
 
   const publishedAt = new Date(item.isoDate)
 
-  // don't fetch older than 24 hrs items for new feeds
+  // don't fetch older than 4 days items for new feeds
   if (!mostRecentItemTimestamp) {
-    return publishedAt < new Date(Date.now() - 24 * 60 * 60 * 1000)
+    return publishedAt < new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
   }
 
   // don't fetch existing items for old feeds
@@ -349,7 +349,7 @@ const fetchContentAndCreateItem = async (
   try {
     const task = await createHttpTaskWithToken({
       queue: 'omnivore-rss-feed-queue',
-      taskHandlerUrl: env.queue.contentFetchGCFUrl,
+      taskHandlerUrl: env.queue.contentFetchGCFUrl || env.queue.contentFetchUrl,
       payload,
     })
     return !!task

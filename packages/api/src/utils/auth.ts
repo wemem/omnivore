@@ -9,6 +9,8 @@ import { env } from '../env'
 import { getRepository } from '../repository'
 import { Claims, ClaimsToSet } from '../resolvers/types'
 import { logger } from './logger'
+import { getUser } from '../affine/services/user'
+import { parseAuthUserSeqNum } from '../affine/services/sessions'
 
 export const OmnivoreAuthorizationHeader = 'Omnivore-Authorization'
 
@@ -72,6 +74,11 @@ export const getClaimsByToken = async (
 ): Promise<Claims | undefined> => {
   if (!token) {
     return undefined
+  }
+
+  const { user, expiresAt } = await getUser(token);
+  if (user && expiresAt) {
+    return { uid: user.id, iat: 0, exp: expiresAt.getTime() / 1000 }
   }
 
   try {

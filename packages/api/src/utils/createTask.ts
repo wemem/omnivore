@@ -154,6 +154,13 @@ const createHttpTaskWithToken = async ({
 > => {
   // If there is no Google Cloud Project Id exposed, it means that we are in local environment
   if (env.dev.isLocal || !project) {
+    console.log(
+      'Sending content fetch task:' +
+        JSON.stringify({
+          taskHandlerUrl: taskHandlerUrl,
+          payload: payload,
+        })
+    )
     setTimeout(() => {
       axios
         .post(taskHandlerUrl, payload, {

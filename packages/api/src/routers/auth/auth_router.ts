@@ -48,6 +48,7 @@ import {
 } from './google_auth'
 import { createWebAuthToken } from './jwt_helpers'
 import { createMobileAccountCreationResponse } from './mobile/account_creation'
+import { createUserInternal } from '../../services/create_user_internal'
 
 export interface SignupRequest {
   email: string

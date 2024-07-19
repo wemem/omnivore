@@ -99,7 +99,7 @@ export const setShortcuts = async (
       uid: userId,
     }
   )
-  if (!result.affected || result.affected < 1) {
+  if (result.affected === undefined) {
     throw Error('Could not update shortcuts')
   }
   return shortcuts

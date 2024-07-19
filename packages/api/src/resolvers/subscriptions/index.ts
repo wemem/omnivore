@@ -195,6 +195,19 @@ export const subscribeResolver = authorized<
         env: env.server.apiEnv,
       },
     })
+
+    if (!input.url.startsWith('http:') && !input.url.startsWith('https:')) {
+      const subscription = await getRepository(Subscription).findOneBy({
+        id: input.url,
+      })
+      if (!subscription) {
+        return {
+          errorCodes: [SubscribeErrorCode.NotFound],
+        }
+      }
+      input.url = subscription.url!
+    }
+
     // use user provided url
     const feedUrl = input.url
     try {

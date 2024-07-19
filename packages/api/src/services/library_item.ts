@@ -78,6 +78,7 @@ enum InFilter {
   ARCHIVE = 'archive',
   TRASH = 'trash',
   FOLLOWING = 'following',
+  SUCESS = 'sucess',
 }
 
 export interface SearchArgs {
@@ -312,6 +313,8 @@ export const buildQueryString = (
           switch (value.toLowerCase()) {
             case InFilter.ALL:
               return null
+            case InFilter.SUCESS:
+              return `library_item.state = 'SUCCEEDED'`
             case InFilter.ARCHIVE:
               return `(library_item.state = 'ARCHIVED' 
                         OR (library_item.state IN ('SUCCEEDED', 'ARCHIVED', 'PROCESSING', 'FAILED', 'CONTENT_NOT_FETCHED') 
@@ -1499,6 +1502,8 @@ export const filterItemEvents = (
         switch (lowercasedValue) {
           case InFilter.ALL:
             return true
+          case InFilter.SUCESS:
+            return event.state === LibraryItemState.Succeeded
           case InFilter.ARCHIVE:
             return event.state === LibraryItemState.Archived
           case InFilter.TRASH:

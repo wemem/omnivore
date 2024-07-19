@@ -28,6 +28,16 @@ export interface BackendEnv {
       dbName: string
     }
   }
+  affinePg: {
+    host: string
+    port: number
+    userName: string
+    password: string
+    dbName: string
+    pool: {
+      max: number
+    }
+  }
   server: {
     jwtSecret: string
     ssoJwtSecret: string
@@ -247,6 +257,17 @@ export function getEnv(): BackendEnv {
       dbName: parse('PG_REPLICA_DB'),
     },
   }
+  const affinePg = {
+    host: parse('PG_HOST'),
+    port: parseInt(parse('PG_PORT'), 10),
+    userName: parse('PG_USER'),
+    password: parse('PG_PASSWORD'),
+    dbName: parse('PG_AFFINE_DB'),
+    pool: {
+      max: parseInt(parse('PG_AFFINE_POOL_MAX'), 10),
+    }
+  }
+
   const server = {
     jwtSecret: parse('JWT_SECRET'),
     ssoJwtSecret: parse('SSO_JWT_SECRET'),
@@ -370,6 +391,7 @@ export function getEnv(): BackendEnv {
 
   return {
     pg,
+    affinePg,
     client,
     server,
     google,

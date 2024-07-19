@@ -1,8 +1,4 @@
-import { EntityManager } from 'typeorm'
 import { appDataSource } from '../data_source'
-import { Filter } from '../entity/filter'
-import { GroupMembership } from '../entity/groups/group_membership'
-import { Invite } from '../entity/groups/invite'
 import { Profile } from '../entity/profile'
 import { StatusType, User } from '../entity/user'
 import { env } from '../env'
@@ -13,14 +9,15 @@ import { userRepository } from '../repository/user'
 import { AuthProvider } from '../routers/auth/auth_types'
 import { analytics } from '../utils/analytics'
 import { IntercomClient } from '../utils/intercom'
-import { logger } from '../utils/logger'
 import { validateUsername } from '../utils/usernamePolicy'
 import { addPopularReadsForNewUser } from './popular_reads'
 import { sendNewAccountVerificationEmail } from './send_emails'
+import { createDefaultFiltersForUser } from './create_user'
 
 export const MAX_RECORDS_LIMIT = 1000
 
-export const createUser = async (input: {
+export const createUserInternal = async (input: {
+  userId: string
   provider: AuthProvider
   sourceUserId?: string
   email: string
@@ -50,7 +47,7 @@ export const createUser = async (input: {
 
     analytics.capture({
       distinctId: existingUser.id,
-      event: 'create_user',
+      event: 'create_user_internal',
       properties: {
         env: env.server.apiEnv,
         email: existingUser.email,
@@ -61,34 +58,16 @@ export const createUser = async (input: {
     return [existingUser, profile]
   }
 
-  if (!validateUsername(input.username)) {
-    return Promise.reject({ errorCode: SignupErrorCode.InvalidUsername })
-  }
-
   const [user, profile] = await appDataSource.transaction<[User, Profile]>(
     async (t) => {
-      let hasInvite = false
-      let invite: Invite | null = null
-
-      if (input.inviteCode) {
-        const inviteCodeRepo = t.getRepository(Invite)
-        invite = await inviteCodeRepo.findOne({
-          where: { code: input.inviteCode },
-          relations: ['group'],
-        })
-        if (invite && (await validateInvite(t, invite))) {
-          hasInvite = true
-        }
-      }
       const user = await t.getRepository(User).save({
+        id: input.userId,
         source: input.provider,
         name: input.name,
         email: trimmedEmail,
-        sourceUserId: input.sourceUserId,
+        sourceUserId: input.userId,
         password: input.password,
-        status: input.pendingConfirmation
-          ? StatusType.Pending
-          : StatusType.Active,
+        status: StatusType.Active,
       })
       const profile = await t.getRepository(Profile).save({
         username: input.username,
@@ -96,13 +75,6 @@ export const createUser = async (input: {
         bio: input.bio,
         user,
       })
-      if (hasInvite && invite) {
-        await t.getRepository(GroupMembership).save({
-          user: user,
-          invite: invite,
-          group: invite.group,
-        })
-      }
 
       await createDefaultFiltersForUser(t)(user.id)
 
@@ -134,7 +106,7 @@ export const createUser = async (input: {
 
   analytics.capture({
     distinctId: user.id,
-    event: 'create_user',
+    event: 'create_user_internal',
     properties: {
       env: env.server.apiEnv,
       email: user.email,
@@ -149,50 +121,4 @@ export const createUser = async (input: {
   }
 
   return [user, profile]
-}
-
-export const createDefaultFiltersForUser =
-  (t: EntityManager) =>
-  async (userId: string): Promise<Filter[]> => {
-    const defaultFilters = [
-      { name: 'Inbox', filter: 'in:inbox' },
-      {
-        name: 'Continue Reading',
-        filter: 'in:inbox sort:read-desc is:reading',
-      },
-      { name: 'Non-Feed Items', filter: 'no:subscription' },
-      { name: 'Highlights', filter: 'in:all has:highlights mode:highlights' },
-      { name: 'Unlabeled', filter: 'no:label' },
-      { name: 'Oldest First', filter: 'sort:saved-asc' },
-      { name: 'Files', filter: 'type:file' },
-      { name: 'Archived', filter: 'in:archive' },
-    ].map((it, position) => ({
-      ...it,
-      user: { id: userId },
-      position,
-      defaultFilter: true,
-      category: 'Search',
-    }))
-
-    return t.getRepository(Filter).save(defaultFilters)
-  }
-
-// Maybe this should be moved into a service
-export const validateInvite = async (
-  entityManager: EntityManager,
-  invite: Invite
-): Promise<boolean> => {
-  if (invite.expirationTime < new Date()) {
-    logger.info('rejecting invite, expired', invite)
-    return false
-  }
-  const numMembers = await entityManager
-    .getRepository(GroupMembership)
-    .countBy({ invite: { id: invite.id } })
-
-  if (numMembers >= invite.maxMembers) {
-    logger.info('rejecting invite, too many users', { invite, numMembers })
-    return false
-  }
-  return true
 }

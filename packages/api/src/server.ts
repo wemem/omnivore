@@ -13,7 +13,7 @@ import { createServer } from 'http'
 import * as prom from 'prom-client'
 import { config, loggers } from 'winston'
 import { makeApolloServer } from './apollo'
-import { appDataSource } from './data_source'
+import { affineDataSource, appDataSource } from './data_source'
 import { env } from './env'
 import { redisDataSource } from './redis_data_source'
 import { aiSummariesRouter } from './routers/ai_summary_router'
@@ -159,6 +159,7 @@ const main = async (): Promise<void> => {
   // so the container will be restarted and not come online
   // as healthy.
   await appDataSource.initialize()
+  await affineDataSource.initialize()
 
   // redis is optional for the API server
   if (env.redis.cache.url) {
@@ -170,6 +171,7 @@ const main = async (): Promise<void> => {
   const apollo = makeApolloServer(app, httpServer)
   await apollo.start()
   apollo.applyMiddleware({ app, path: '/api/graphql', cors: corsConfig })
+  apollo.applyMiddleware({ app, path: '/api/v1/graphql', cors: corsConfig })
 
   if (!env.dev.isLocal) {
     const mwLogger = loggers.get('express', { levels: config.syslog.levels })

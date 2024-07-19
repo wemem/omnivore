@@ -643,6 +643,7 @@ export const searchResolver = authorized<
     edges: libraryItems.map((item) => ({
       node: {
         ...item,
+        readableContent: htmlToMarkdown(item.readableContent),
         format: params.format || undefined,
       },
       cursor: endCursor,
