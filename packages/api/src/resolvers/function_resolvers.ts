@@ -160,6 +160,7 @@ import { recentSearchesResolver } from './recent_searches'
 import { subscriptionResolver } from './subscriptions'
 import { ResolverContext } from './types'
 import { updateEmailResolver } from './user'
+import { searchSubscriptionsResolver } from '../readease/resolvers/subscriptions'
 
 /* eslint-disable @typescript-eslint/naming-convention */
 type ResultResolveType = {
@@ -331,6 +332,7 @@ export const functionResolvers = {
     newsletterEmails: newsletterEmailsResolver,
     labels: labelsResolver,
     search: searchResolver,
+    searchSubscriptions: searchSubscriptionsResolver,
     subscriptions: subscriptionsResolver,
     sendInstallInstructions: sendInstallInstructionsResolver,
     webhooks: webhooksResolver,

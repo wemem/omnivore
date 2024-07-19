@@ -2388,6 +2388,7 @@ export type Query = {
   rules: RulesResult;
   scanFeeds: ScanFeedsResult;
   search: SearchResult;
+  searchSubscriptions: Array<Subscription>;
   sendInstallInstructions: SendInstallInstructionsResult;
   subscription: SubscriptionResult;
   subscriptions: SubscriptionsResult;
@@ -2461,6 +2462,11 @@ export type QuerySearchArgs = {
   format?: InputMaybe<Scalars['String']>;
   includeContent?: InputMaybe<Scalars['Boolean']>;
   query?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QuerySearchSubscriptionsArgs = {
+  keyword: Scalars['String'];
 };
 
 
@@ -3028,6 +3034,7 @@ export type SearchItem = {
   publishedAt?: Maybe<Scalars['Date']>;
   quote?: Maybe<Scalars['String']>;
   readAt?: Maybe<Scalars['Date']>;
+  readableContent: Scalars['String'];
   readingProgressAnchorIndex: Scalars['Int'];
   readingProgressPercent: Scalars['Float'];
   readingProgressTopPercent?: Maybe<Scalars['Float']>;
@@ -6862,6 +6869,7 @@ export type QueryResolvers<ContextType = ResolverContext, ParentType extends Res
   rules?: Resolver<ResolversTypes['RulesResult'], ParentType, ContextType, Partial<QueryRulesArgs>>;
   scanFeeds?: Resolver<ResolversTypes['ScanFeedsResult'], ParentType, ContextType, RequireFields<QueryScanFeedsArgs, 'input'>>;
   search?: Resolver<ResolversTypes['SearchResult'], ParentType, ContextType, Partial<QuerySearchArgs>>;
+  searchSubscriptions?: Resolver<Array<ResolversTypes['Subscription']>, ParentType, ContextType, RequireFields<QuerySearchSubscriptionsArgs, 'keyword'>>;
   sendInstallInstructions?: Resolver<ResolversTypes['SendInstallInstructionsResult'], ParentType, ContextType>;
   subscription?: Resolver<ResolversTypes['SubscriptionResult'], ParentType, ContextType, RequireFields<QuerySubscriptionArgs, 'id'>>;
   subscriptions?: Resolver<ResolversTypes['SubscriptionsResult'], ParentType, ContextType, Partial<QuerySubscriptionsArgs>>;
@@ -7209,6 +7217,7 @@ export type SearchItemResolvers<ContextType = ResolverContext, ParentType extend
   publishedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   quote?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   readAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  readableContent?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   readingProgressAnchorIndex?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   readingProgressPercent?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   readingProgressTopPercent?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;

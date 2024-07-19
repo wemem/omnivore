@@ -9,8 +9,9 @@ RUN apt-get update && apt-get install -y \
     yarn \
     g++ \
     make \
-    python3
-
+    python3 \
+    dbus
+RUN dbus-daemon --system  --print-address
 WORKDIR /app
 
 ENV CHROMIUM_PATH /usr/bin/chromium

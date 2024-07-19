@@ -44,3 +44,27 @@ export const appDataSource = new DataSource({
       }
     : undefined,
 })
+
+
+
+export const affineDataSource = new DataSource({
+  type: 'postgres',
+  host: env.affinePg.host,
+  port: env.affinePg.port,
+  schema: 'public',
+  username: env.affinePg.userName,
+  password: env.affinePg.password,
+  database: env.affinePg.dbName,
+  logging: ['query', 'info'],
+  entities: [__dirname + '/affine/entity/**/*{.js,.ts}'],
+  subscribers: [__dirname + '/affine/events/**/*{.js,.ts}'],
+  namingStrategy: new SnakeNamingStrategy(),
+  logger: new CustomTypeOrmLogger(['query', 'info']),
+  connectTimeoutMS: 10000, // 10 seconds
+  maxQueryExecutionTime: 10000, // 10 seconds
+  extra: {
+    options: process.env.PG_EXTRA_OPTIONS,
+    max: env.affinePg.pool.max,
+    idleTimeoutMillis: 10000, // 10 seconds
+  },
+})

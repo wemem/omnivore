@@ -1635,6 +1635,7 @@ const schema = gql`
     url: String!
     pageType: PageType!
     contentReader: ContentReader!
+    readableContent: String!
     createdAt: Date!
     updatedAt: Date
     isArchived: Boolean!
@@ -3519,6 +3520,7 @@ const schema = gql`
       sort: SortParams
       type: SubscriptionType
     ): SubscriptionsResult!
+    searchSubscriptions(keyword: String!): [Subscription!]!
     sendInstallInstructions: SendInstallInstructionsResult!
     webhooks: WebhooksResult!
     webhook(id: ID!): WebhookResult!

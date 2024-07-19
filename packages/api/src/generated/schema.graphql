@@ -1840,6 +1840,7 @@ type Query {
   rules(enabled: Boolean): RulesResult!
   scanFeeds(input: ScanFeedsInput!): ScanFeedsResult!
   search(after: String, first: Int, format: String, includeContent: Boolean, query: String): SearchResult!
+  searchSubscriptions(keyword: String!): [Subscription!]!
   sendInstallInstructions: SendInstallInstructionsResult!
   subscription(id: ID!): SubscriptionResult!
   subscriptions(sort: SortParams, type: SubscriptionType): SubscriptionsResult!
@@ -2334,6 +2335,7 @@ type SearchItem {
   publishedAt: Date
   quote: String
   readAt: Date
+  readableContent: String!
   readingProgressAnchorIndex: Int!
   readingProgressPercent: Float!
   readingProgressTopPercent: Float
