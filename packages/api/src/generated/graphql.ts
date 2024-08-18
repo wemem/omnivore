@@ -1466,6 +1466,29 @@ export type HomeSuccess = {
   pageInfo: PageInfo;
 };
 
+export type HtmlToMarkdownError = {
+  __typename?: 'HtmlToMarkdownError';
+  errorCodes: Array<SaveErrorCode>;
+  message?: Maybe<Scalars['String']>;
+};
+
+export type HtmlToMarkdownInput = {
+  clientRequestId: Scalars['ID'];
+  originalContent: Scalars['String'];
+  source: Scalars['String'];
+  title?: InputMaybe<Scalars['String']>;
+  url: Scalars['String'];
+};
+
+export type HtmlToMarkdownResult = HtmlToMarkdownError | HtmlToMarkdownSuccess;
+
+export type HtmlToMarkdownSuccess = {
+  __typename?: 'HtmlToMarkdownSuccess';
+  clientRequestId: Scalars['ID'];
+  markdownContent: Scalars['String'];
+  title: Scalars['String'];
+};
+
 export type ImportFromIntegrationError = {
   __typename?: 'ImportFromIntegrationError';
   errorCodes: Array<ImportFromIntegrationErrorCode>;
@@ -1818,6 +1841,7 @@ export type Mutation = {
   generateApiKey: GenerateApiKeyResult;
   googleLogin: LoginResult;
   googleSignup: GoogleSignupResult;
+  htmlToMarkdown: HtmlToMarkdownResult;
   importFromIntegration: ImportFromIntegrationResult;
   joinGroup: JoinGroupResult;
   leaveGroup: LeaveGroupResult;
@@ -2004,6 +2028,11 @@ export type MutationGoogleLoginArgs = {
 
 export type MutationGoogleSignupArgs = {
   input: GoogleSignupInput;
+};
+
+
+export type MutationHtmlToMarkdownArgs = {
+  input: HtmlToMarkdownInput;
 };
 
 
@@ -4516,6 +4545,10 @@ export type ResolversTypes = {
   HomeResult: ResolversTypes['HomeError'] | ResolversTypes['HomeSuccess'];
   HomeSection: ResolverTypeWrapper<HomeSection>;
   HomeSuccess: ResolverTypeWrapper<HomeSuccess>;
+  HtmlToMarkdownError: ResolverTypeWrapper<HtmlToMarkdownError>;
+  HtmlToMarkdownInput: HtmlToMarkdownInput;
+  HtmlToMarkdownResult: ResolversTypes['HtmlToMarkdownError'] | ResolversTypes['HtmlToMarkdownSuccess'];
+  HtmlToMarkdownSuccess: ResolverTypeWrapper<HtmlToMarkdownSuccess>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   ImportFromIntegrationError: ResolverTypeWrapper<ImportFromIntegrationError>;
   ImportFromIntegrationErrorCode: ImportFromIntegrationErrorCode;
@@ -5102,6 +5135,10 @@ export type ResolversParentTypes = {
   HomeResult: ResolversParentTypes['HomeError'] | ResolversParentTypes['HomeSuccess'];
   HomeSection: HomeSection;
   HomeSuccess: HomeSuccess;
+  HtmlToMarkdownError: HtmlToMarkdownError;
+  HtmlToMarkdownInput: HtmlToMarkdownInput;
+  HtmlToMarkdownResult: ResolversParentTypes['HtmlToMarkdownError'] | ResolversParentTypes['HtmlToMarkdownSuccess'];
+  HtmlToMarkdownSuccess: HtmlToMarkdownSuccess;
   ID: Scalars['ID'];
   ImportFromIntegrationError: ImportFromIntegrationError;
   ImportFromIntegrationResult: ResolversParentTypes['ImportFromIntegrationError'] | ResolversParentTypes['ImportFromIntegrationSuccess'];
@@ -6453,6 +6490,23 @@ export type HomeSuccessResolvers<ContextType = ResolverContext, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type HtmlToMarkdownErrorResolvers<ContextType = ResolverContext, ParentType extends ResolversParentTypes['HtmlToMarkdownError'] = ResolversParentTypes['HtmlToMarkdownError']> = {
+  errorCodes?: Resolver<Array<ResolversTypes['SaveErrorCode']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HtmlToMarkdownResultResolvers<ContextType = ResolverContext, ParentType extends ResolversParentTypes['HtmlToMarkdownResult'] = ResolversParentTypes['HtmlToMarkdownResult']> = {
+  __resolveType: TypeResolveFn<'HtmlToMarkdownError' | 'HtmlToMarkdownSuccess', ParentType, ContextType>;
+};
+
+export type HtmlToMarkdownSuccessResolvers<ContextType = ResolverContext, ParentType extends ResolversParentTypes['HtmlToMarkdownSuccess'] = ResolversParentTypes['HtmlToMarkdownSuccess']> = {
+  clientRequestId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  markdownContent?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ImportFromIntegrationErrorResolvers<ContextType = ResolverContext, ParentType extends ResolversParentTypes['ImportFromIntegrationError'] = ResolversParentTypes['ImportFromIntegrationError']> = {
   errorCodes?: Resolver<Array<ResolversTypes['ImportFromIntegrationErrorCode']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -6718,6 +6772,7 @@ export type MutationResolvers<ContextType = ResolverContext, ParentType extends 
   generateApiKey?: Resolver<ResolversTypes['GenerateApiKeyResult'], ParentType, ContextType, RequireFields<MutationGenerateApiKeyArgs, 'input'>>;
   googleLogin?: Resolver<ResolversTypes['LoginResult'], ParentType, ContextType, RequireFields<MutationGoogleLoginArgs, 'input'>>;
   googleSignup?: Resolver<ResolversTypes['GoogleSignupResult'], ParentType, ContextType, RequireFields<MutationGoogleSignupArgs, 'input'>>;
+  htmlToMarkdown?: Resolver<ResolversTypes['HtmlToMarkdownResult'], ParentType, ContextType, RequireFields<MutationHtmlToMarkdownArgs, 'input'>>;
   importFromIntegration?: Resolver<ResolversTypes['ImportFromIntegrationResult'], ParentType, ContextType, RequireFields<MutationImportFromIntegrationArgs, 'integrationId'>>;
   joinGroup?: Resolver<ResolversTypes['JoinGroupResult'], ParentType, ContextType, RequireFields<MutationJoinGroupArgs, 'inviteCode'>>;
   leaveGroup?: Resolver<ResolversTypes['LeaveGroupResult'], ParentType, ContextType, RequireFields<MutationLeaveGroupArgs, 'groupId'>>;
@@ -8113,6 +8168,9 @@ export type Resolvers<ContextType = ResolverContext> = {
   HomeResult?: HomeResultResolvers<ContextType>;
   HomeSection?: HomeSectionResolvers<ContextType>;
   HomeSuccess?: HomeSuccessResolvers<ContextType>;
+  HtmlToMarkdownError?: HtmlToMarkdownErrorResolvers<ContextType>;
+  HtmlToMarkdownResult?: HtmlToMarkdownResultResolvers<ContextType>;
+  HtmlToMarkdownSuccess?: HtmlToMarkdownSuccessResolvers<ContextType>;
   ImportFromIntegrationError?: ImportFromIntegrationErrorResolvers<ContextType>;
   ImportFromIntegrationResult?: ImportFromIntegrationResultResolvers<ContextType>;
   ImportFromIntegrationSuccess?: ImportFromIntegrationSuccessResolvers<ContextType>;

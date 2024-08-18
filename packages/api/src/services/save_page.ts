@@ -43,7 +43,7 @@ const ALREADY_PARSED_SOURCES = [
   'pocket',
 ]
 
-const createSlug = (url: string, title?: string | null | undefined) => {
+export const createSlug = (url: string, title?: string | null | undefined) => {
   const { pathname } = new URL(url)
   const croppedPathname = decodeURIComponent(
     pathname

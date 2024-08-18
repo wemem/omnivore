@@ -32,7 +32,7 @@ import { findUserFeatures } from '../services/features'
 import { Merge } from '../util'
 import { isBase64Image, validatedDate, wordsCount } from '../utils/helpers'
 import { createImageProxyUrl } from '../utils/imageproxy'
-import { contentConverter } from '../utils/parser'
+import { contentConverter, htmlToMarkdown } from '../utils/parser'
 import {
   generateDownloadSignedUrl,
   generateUploadFilePathName,
@@ -98,6 +98,7 @@ import {
   googleLoginResolver,
   googleSignupResolver,
   groupsResolver,
+  htmlToMarkdownResolver,
   importFromIntegrationResolver,
   integrationResolver,
   integrationsResolver,
@@ -266,6 +267,7 @@ export const functionResolvers = {
     deleteNewsletterEmail: deleteNewsletterEmailResolver,
     saveUrl: saveUrlResolver,
     savePage: savePageResolver,
+    htmlToMarkdown: htmlToMarkdownResolver,
     saveFile: saveFileResolver,
     setDeviceToken: setDeviceTokenResolver,
     createLabel: createLabelResolver,
