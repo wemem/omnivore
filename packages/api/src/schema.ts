@@ -554,6 +554,17 @@ const schema = gql`
     clientRequestId: ID!
   }
 
+  type HtmlToMarkdownError {
+    errorCodes: [SaveErrorCode!]!
+    message: String
+  }
+
+  type HtmlToMarkdownSuccess {
+    clientRequestId: ID!
+    markdownContent: String!
+    title: String!
+  }
+
   input SaveFileInput {
     url: String!
     source: String!
@@ -597,6 +608,14 @@ const schema = gql`
     folder: String
   }
 
+  input HtmlToMarkdownInput {
+    url: String!
+    source: String!
+    clientRequestId: ID!
+    title: String
+    originalContent: String!
+  }
+
   input SaveUrlInput {
     url: String!
     source: String!
@@ -611,6 +630,8 @@ const schema = gql`
   }
 
   union SaveResult = SaveSuccess | SaveError
+
+  union HtmlToMarkdownResult = HtmlToMarkdownSuccess | HtmlToMarkdownError
 
   input UpdatePageInput {
     pageId: ID!
@@ -3393,6 +3414,7 @@ const schema = gql`
     deleteNewsletterEmail(newsletterEmailId: ID!): DeleteNewsletterEmailResult!
     saveUrl(input: SaveUrlInput!): SaveResult!
     savePage(input: SavePageInput!): SaveResult!
+    htmlToMarkdown(input: HtmlToMarkdownInput!): HtmlToMarkdownResult!
     updatePage(input: UpdatePageInput!): UpdatePageResult!
     saveFile(input: SaveFileInput!): SaveResult!
     # createReminder(input: CreateReminderInput!): CreateReminderResult!

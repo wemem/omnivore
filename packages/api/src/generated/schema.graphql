@@ -1320,6 +1320,27 @@ type HomeSuccess {
   pageInfo: PageInfo!
 }
 
+type HtmlToMarkdownError {
+  errorCodes: [SaveErrorCode!]!
+  message: String
+}
+
+input HtmlToMarkdownInput {
+  clientRequestId: ID!
+  originalContent: String!
+  source: String!
+  title: String
+  url: String!
+}
+
+union HtmlToMarkdownResult = HtmlToMarkdownError | HtmlToMarkdownSuccess
+
+type HtmlToMarkdownSuccess {
+  clientRequestId: ID!
+  markdownContent: String!
+  title: String!
+}
+
 type ImportFromIntegrationError {
   errorCodes: [ImportFromIntegrationErrorCode!]!
 }
@@ -1643,6 +1664,7 @@ type Mutation {
   generateApiKey(input: GenerateApiKeyInput!): GenerateApiKeyResult!
   googleLogin(input: GoogleLoginInput!): LoginResult!
   googleSignup(input: GoogleSignupInput!): GoogleSignupResult!
+  htmlToMarkdown(input: HtmlToMarkdownInput!): HtmlToMarkdownResult!
   importFromIntegration(integrationId: ID!): ImportFromIntegrationResult!
   joinGroup(inviteCode: String!): JoinGroupResult!
   leaveGroup(groupId: ID!): LeaveGroupResult!
