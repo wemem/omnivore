@@ -205,7 +205,7 @@ const getReadabilityResult = async (
     try {
       const article = await new Readability(document, {
         debug: DEBUG_MODE,
-        createImageProxyUrl,
+        // createImageProxyUrl,
         keepTables: isNewsletter,
         ignoreLinkDensity: isNewsletter,
         url,
