@@ -2860,14 +2860,6 @@
     arrify "^2.0.0"
     extend "^3.0.2"
 
-"@google-cloud/paginator@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@google-cloud/paginator/-/paginator-4.0.1.tgz#5fb8793d4f84d18c50a6f2fad3dadab8d2c533ef"
-  integrity sha512-6G1ui6bWhNyHjmbYwavdN7mpVPRBtyDg/bfqBTAlwr413On2TnFNfDxc9UhTJctkgoCDgQXEKiRPLPR9USlkbQ==
-  dependencies:
-    arrify "^2.0.0"
-    extend "^3.0.2"
-
 "@google-cloud/paginator@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@google-cloud/paginator/-/paginator-5.0.0.tgz#b8cc62f151685095d11467402cbf417c41bf14e6"
@@ -2876,10 +2868,10 @@
     arrify "^2.0.0"
     extend "^3.0.2"
 
-"@google-cloud/precise-date@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@google-cloud/precise-date/-/precise-date-3.0.1.tgz#1e6659a14af662442037b8f4d20dbc82bf1a78bd"
-  integrity sha512-crK2rgNFfvLoSgcKJY7ZBOLW91IimVNmPfi1CL+kMTf78pTJYd29XqEVedAeBu4DwCJc0EDIp1MpctLgoPq+Uw==
+"@google-cloud/precise-date@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@google-cloud/precise-date/-/precise-date-4.0.0.tgz#e179893a3ad628b17a6fabdfcc9d468753aac11a"
+  integrity sha512-1TUx3KdaU3cN7nfCdNf+UVqA/PSX29Cjcox3fZZBtINlRrXVTmUkQnCKv2MbBUbCopbK4olAT1IHl76uZyCiVA==
 
 "@google-cloud/projectify@^3.0.0":
   version "3.0.0"
@@ -2891,7 +2883,7 @@
   resolved "https://registry.yarnpkg.com/@google-cloud/projectify/-/projectify-4.0.0.tgz#d600e0433daf51b88c1fa95ac7f02e38e80a07be"
   integrity sha512-MmaX6HeSvyPbWGwFq7mXdo0uQZLGBYCwziiLIGq5JVX+/bdI3SAq6bP98trV5eTWfLuvsMcIC1YJOF2vfteLFA==
 
-"@google-cloud/promisify@^3.0.0", "@google-cloud/promisify@^3.0.1":
+"@google-cloud/promisify@^3.0.0":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@google-cloud/promisify/-/promisify-3.0.1.tgz#8d724fb280f47d1ff99953aee0c1669b25238c2e"
   integrity sha512-z1CjRjtQyBOYL+5Qr9DdYIfrdLBe746jRTYfaYU6MeXkqp7UfYs/jX16lFFVzZ7PGEJvqZNqYUEtb1mvDww4pA==
@@ -2902,22 +2894,20 @@
   integrity sha512-Orxzlfb9c67A15cq2JQEyVc7wEsmFBmHjZWZYQMUyJ1qivXyMwdyNOs9odi79hze+2zqdTtu1E19IM/FtqZ10g==
 
 "@google-cloud/pubsub@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/pubsub/-/pubsub-4.0.0.tgz#5784da1d9dd3ed1993e3ea68b42603d0b388cd3b"
-  integrity sha512-xvzdrblmNg4mfEtYNHOuV11NceQy8AdAmujaHNOs5KmWs4yOYPpbbdvE/ZSjFUJ+MuVqdo9E4p5S0QFCozl4Hw==
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/@google-cloud/pubsub/-/pubsub-4.8.0.tgz#b51acb0c75c6975deeaa7a68d0b56a5d736bb048"
+  integrity sha512-H9S4i5mAeQg5A4MZox8XfWnoxlMehlIn8QHWZ3iOj7Kz/yaHufsI5JtSGaezjZv+wF4elur5Yycygnl6pWHSyg==
   dependencies:
-    "@google-cloud/paginator" "^4.0.1"
-    "@google-cloud/precise-date" "^3.0.1"
-    "@google-cloud/projectify" "^3.0.0"
-    "@google-cloud/promisify" "^3.0.1"
-    "@opentelemetry/api" "^1.0.0"
-    "@opentelemetry/semantic-conventions" "~1.3.0"
-    "@types/duplexify" "^3.6.0"
-    "@types/long" "^4.0.0"
+    "@google-cloud/paginator" "^5.0.0"
+    "@google-cloud/precise-date" "^4.0.0"
+    "@google-cloud/projectify" "^4.0.0"
+    "@google-cloud/promisify" "^4.0.0"
+    "@opentelemetry/api" "~1.9.0"
+    "@opentelemetry/semantic-conventions" "~1.26.0"
     arrify "^2.0.0"
     extend "^3.0.2"
-    google-auth-library "^9.0.0"
-    google-gax "^4.0.2"
+    google-auth-library "^9.3.0"
+    google-gax "^4.3.3"
     heap-js "^2.2.0"
     is-stream-ended "^0.1.4"
     lodash.snakecase "^4.1.1"
@@ -3414,6 +3404,14 @@
     "@grpc/proto-loader" "^0.7.0"
     "@types/node" ">=12.12.47"
 
+"@grpc/grpc-js@^1.10.9":
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.12.2.tgz#97eda82dd49bb9c24eaf6434ea8d7de446e95aac"
+  integrity sha512-bgxdZmgTrJZX50OjyVwz3+mNEnCTNkh3cIqGPWVNeW9jX6bn1ZkU80uPd+67/ZpIJIjRQ9qaHCjhavyoWYxumg==
+  dependencies:
+    "@grpc/proto-loader" "^0.7.13"
+    "@js-sdsl/ordered-map" "^4.4.2"
+
 "@grpc/proto-loader@^0.7.0":
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.7.3.tgz#75a6f95b51b85c5078ac7394da93850c32d36bb8"
@@ -3424,6 +3422,16 @@
     long "^4.0.0"
     protobufjs "^7.0.0"
     yargs "^16.2.0"
+
+"@grpc/proto-loader@^0.7.13":
+  version "0.7.13"
+  resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.7.13.tgz#f6a44b2b7c9f7b609f5748c6eac2d420e37670cf"
+  integrity sha512-AiXO/bfe9bmxBjxxtYxFAXGZvMaN5s8kO+jBHAJCON8rJoB5YS/D6X7ZNc6XQkuHNmyl4CYaMI1fJ/Gn27RGGw==
+  dependencies:
+    lodash.camelcase "^4.3.0"
+    long "^5.0.0"
+    protobufjs "^7.2.5"
+    yargs "^17.7.2"
 
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.2"
@@ -3785,6 +3793,11 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
+
+"@js-sdsl/ordered-map@^4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@js-sdsl/ordered-map/-/ordered-map-4.4.2.tgz#9299f82874bab9e4c7f9c48d865becbfe8d6907c"
+  integrity sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==
 
 "@jsdoc/salty@^0.2.1":
   version "0.2.4"
@@ -4604,15 +4617,10 @@
   dependencies:
     "@opentelemetry/api" "^1.0.0"
 
-"@opentelemetry/api@^1.0.0", "@opentelemetry/api@^1.0.1":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.0.4.tgz#a167e46c10d05a07ab299fc518793b0cff8f6924"
-  integrity sha512-BuJuXRSJNQ3QoKA6GWWDyuLpOUck+9hAXNMCnrloc1aWVoy6Xq6t9PUV08aBZ4Lutqq2LEHM486bpZqoViScog==
-
-"@opentelemetry/api@^1.4.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.7.0.tgz#b139c81999c23e3c8d3c0a7234480e945920fc40"
-  integrity sha512-AdY5wvN0P2vXBi3b29hxZgSFvdhdxPB9+f0B6s//P9Q8nibRWeA3cHm8UmLpio9ABigkVHJ5NMPk+Mz8VCCyrw==
+"@opentelemetry/api@^1.0.0", "@opentelemetry/api@^1.0.1", "@opentelemetry/api@^1.4.0", "@opentelemetry/api@~1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.9.0.tgz#d03eba68273dc0f7509e2a3d5cba21eae10379fe"
+  integrity sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==
 
 "@opentelemetry/context-async-hooks@0.24.0":
   version "0.24.0"
@@ -4845,15 +4853,10 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/semantic-conventions/-/semantic-conventions-1.2.0.tgz#1549c1d88dc45d720b8487e39077eacc69636c73"
   integrity sha512-BNKB9fiYVghALJzCuWO3eNYfdTExPVK4ykrtmfNfy0A6UWYhOYjGMXifUmkunDJNL8ju9tBobo8jF0WR9zGy1Q==
 
-"@opentelemetry/semantic-conventions@^1.0.0", "@opentelemetry/semantic-conventions@^1.0.1":
-  version "1.22.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/semantic-conventions/-/semantic-conventions-1.22.0.tgz#d7502533a7c96e25baab86bac965468e0703a8b4"
-  integrity sha512-CAOgFOKLybd02uj/GhCdEeeBjOS0yeoDeo/CA7ASBSmenpZHAKGB3iDm/rv3BQLcabb/OprDEsSQ1y0P8A7Siw==
-
-"@opentelemetry/semantic-conventions@~1.3.0":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/semantic-conventions/-/semantic-conventions-1.3.1.tgz#ba07b864a3c955f061aa30ea3ef7f4ae4449794a"
-  integrity sha512-wU5J8rUoo32oSef/rFpOT1HIjLjAv3qIDHkw1QIhODV3OpAVHi5oVzlouozg9obUmZKtbZ0qUe/m7FP0y0yBzA==
+"@opentelemetry/semantic-conventions@^1.0.0", "@opentelemetry/semantic-conventions@^1.0.1", "@opentelemetry/semantic-conventions@~1.26.0":
+  version "1.26.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/semantic-conventions/-/semantic-conventions-1.26.0.tgz#42da14476529ca86d0af4c11f58910f242a0a232"
+  integrity sha512-U9PJlOswJPSgQVPI+XEuNLElyFWkb0hAiMg+DExD9V0St03X2lPHGMdxMY/LrVmoukuIpXJ12oyrOtEZ4uXFkw==
 
 "@opentelemetry/tracing@0.24.0", "@opentelemetry/tracing@^0.24.0":
   version "0.24.0"
@@ -7911,13 +7914,6 @@
   integrity sha512-1Wg0g3BtQF7sSb27fJQAKck1HECM6zV1EB66j8JH9i3LCjYabJa0FSdiSgsD5K/RbrsR0SiraKacLB+T8ZVYAg==
   dependencies:
     "@types/trusted-types" "*"
-
-"@types/duplexify@^3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@types/duplexify/-/duplexify-3.6.0.tgz#dfc82b64bd3a2168f5bd26444af165bf0237dcd8"
-  integrity sha512-5zOA53RUlzN74bvrSGwjudssD9F3a797sDZQkiYpUOxW+WHaXTCPz4/d5Dgi6FKnOqZ2CpaTo0DhgIfsXAOE/A==
-  dependencies:
-    "@types/node" "*"
 
 "@types/eslint-scope@^3.7.3":
   version "3.7.3"
@@ -17138,10 +17134,10 @@ google-auth-library@^8.0.1, google-auth-library@^8.0.2:
     jws "^4.0.0"
     lru-cache "^6.0.0"
 
-google-auth-library@^9.0.0, google-auth-library@^9.6.3:
-  version "9.6.3"
-  resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-9.6.3.tgz#add8935bc5b842a8e80f84fef2b5ed9febb41d48"
-  integrity sha512-4CacM29MLC2eT9Cey5GDVK4Q8t+MMp8+OEdOaqD9MG6b0dOyLORaaeJMPQ7EESVgm/+z5EKYyFLxgzBJlJgyHQ==
+google-auth-library@^9.0.0, google-auth-library@^9.3.0, google-auth-library@^9.6.3:
+  version "9.14.2"
+  resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-9.14.2.tgz#92a53ba32b3a9ff9ced8ed34129edb5a7fa7fb52"
+  integrity sha512-R+FRIfk1GBo3RdlRYWPdwk8nmtVUOn6+BkDomAC46KoU8kzXzE1HLmOasSCbWUByMMAGkknVF0G5kQ69Vj7dlA==
   dependencies:
     base64-js "^1.3.0"
     ecdsa-sig-formatter "^1.0.11"
@@ -17171,22 +17167,23 @@ google-gax@^3.5.7:
     protobufjs-cli "1.1.1"
     retry-request "^5.0.0"
 
-google-gax@^4.0.2, google-gax@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-4.0.3.tgz#4a0a69a0edbde2c1dbc9b160549db6e60492786e"
-  integrity sha512-gllHYRhZvpz0LcVN+xtyzBeUa/ZYiLGF4JNBECrvL/LxDkaJc09hHoQ+KzRBI2Ewqgrjj7V3QrOC2pGno5ropw==
+google-gax@^4.0.3, google-gax@^4.3.3:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-4.4.1.tgz#95a9cf7ee7777ac22d1926a45b5f886dd8beecae"
+  integrity sha512-Phyp9fMfA00J3sZbJxbbB4jC55b7DBjE3F6poyL3wKMEBVKA79q6BGuHcTiM28yOzVql0NDbRL8MLLh8Iwk9Dg==
   dependencies:
-    "@grpc/grpc-js" "~1.8.0"
-    "@grpc/proto-loader" "^0.7.0"
+    "@grpc/grpc-js" "^1.10.9"
+    "@grpc/proto-loader" "^0.7.13"
     "@types/long" "^4.0.0"
     abort-controller "^3.0.0"
     duplexify "^4.0.0"
-    google-auth-library "^9.0.0"
-    node-fetch "^2.6.1"
+    google-auth-library "^9.3.0"
+    node-fetch "^2.7.0"
     object-hash "^3.0.0"
-    proto3-json-serializer "^1.1.1"
-    protobufjs "7.2.4"
-    retry-request "^6.0.0"
+    proto3-json-serializer "^2.0.2"
+    protobufjs "^7.3.2"
+    retry-request "^7.0.0"
+    uuid "^9.0.1"
 
 google-p12-pem@^3.0.3:
   version "3.1.2"
@@ -23290,6 +23287,13 @@ node-fetch@^2.6.9:
   dependencies:
     whatwg-url "^5.0.0"
 
+node-fetch@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
+  integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
+  dependencies:
+    whatwg-url "^5.0.0"
+
 node-forge@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.10.0.tgz#32dea2afb3e9926f02ee5ce8794902691a676bf3"
@@ -25863,12 +25867,12 @@ proto3-json-serializer@^1.0.0:
   dependencies:
     protobufjs "^6.11.3"
 
-proto3-json-serializer@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/proto3-json-serializer/-/proto3-json-serializer-1.1.1.tgz#1b5703152b6ce811c5cdcc6468032caf53521331"
-  integrity sha512-AwAuY4g9nxx0u52DnSMkqqgyLHaW/XaPLtaAo3y/ZCfeaQB/g4YDH4kb8Wc/mWzWvu0YjOznVnfn373MVZZrgw==
+proto3-json-serializer@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/proto3-json-serializer/-/proto3-json-serializer-2.0.2.tgz#5b705203b4d58f3880596c95fad64902617529dd"
+  integrity sha512-SAzp/O4Yh02jGdRc+uIrGoe87dkN/XtwxfZ4ZyafJHymd79ozp5VG5nyZ7ygqPM5+cpLDjjGnYFUkngonyDPOQ==
   dependencies:
-    protobufjs "^7.0.0"
+    protobufjs "^7.2.5"
 
 protobufjs-cli@1.1.1:
   version "1.1.1"
@@ -25945,6 +25949,24 @@ protobufjs@^7.0.0, protobufjs@^7.2.5:
   version "7.2.5"
   resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-7.2.5.tgz#45d5c57387a6d29a17aab6846dcc283f9b8e7f2d"
   integrity sha512-gGXRSXvxQ7UiPgfw8gevrfRWcTlSbOFg+p/N+JVJEK5VhueL2miT6qTymqAmjr1Q5WbOCyJbyrk6JfWKwlFn6A==
+  dependencies:
+    "@protobufjs/aspromise" "^1.1.2"
+    "@protobufjs/base64" "^1.1.2"
+    "@protobufjs/codegen" "^2.0.4"
+    "@protobufjs/eventemitter" "^1.1.0"
+    "@protobufjs/fetch" "^1.1.0"
+    "@protobufjs/float" "^1.0.2"
+    "@protobufjs/inquire" "^1.1.0"
+    "@protobufjs/path" "^1.1.2"
+    "@protobufjs/pool" "^1.1.0"
+    "@protobufjs/utf8" "^1.1.0"
+    "@types/node" ">=13.7.0"
+    long "^5.0.0"
+
+protobufjs@^7.3.2:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-7.4.0.tgz#7efe324ce9b3b61c82aae5de810d287bc08a248a"
+  integrity sha512-mRUWCc3KUU4w1jU8sGxICXH/gNS94DvI1gxqDvBzhj1JpcsimQkYiOJfwsPUykUI5ZaspFbSgmBLER8IrQ3tqw==
   dependencies:
     "@protobufjs/aspromise" "^1.1.2"
     "@protobufjs/base64" "^1.1.2"
@@ -32339,7 +32361,7 @@ yargs@16.2.0, yargs@^16.0.0, yargs@^16.2.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yargs@17.7.2, yargs@^17.5.1, yargs@^17.6.2:
+yargs@17.7.2, yargs@^17.5.1, yargs@^17.6.2, yargs@^17.7.2:
   version "17.7.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.7.2.tgz#991df39aca675a192b816e1e0363f9d75d2aa269"
   integrity sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==
