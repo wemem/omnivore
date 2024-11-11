@@ -180,10 +180,16 @@ const main = async (): Promise<void> => {
     app.use(mw)
   }
 
-  const listener = httpServer.listen({ port: PORT }, async () => {
-    const logger = buildLogger('app.dispatch')
-    logger.notice(`🚀 Server ready at ${apollo.graphqlPath}`)
-  })
+  const listener = httpServer.listen(
+    {
+      port: PORT,
+      host: '::',
+    },
+    async () => {
+      const logger = buildLogger('app.dispatch')
+      logger.notice(`🚀 Server ready at ${apollo.graphqlPath}`)
+    }
+  )
 
   // Avoid keepalive timeout-related connection drops manifesting in user-facing 502s.
   // See here: https://cloud.google.com/load-balancing/docs/https#timeouts_and_retries
