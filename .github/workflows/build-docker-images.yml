@@ -29,6 +29,7 @@ jobs:
           context: .
           file: packages/api/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/wemem/omnivore-api:${{ github.sha }}
             ghcr.io/wemem/omnivore-api:latest
@@ -55,6 +56,7 @@ jobs:
           context: .
           file: packages/content-fetch/Dockerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/wemem/omnivore-content-fetch:${{ github.sha }}
             ghcr.io/wemem/omnivore-content-fetch:latest
