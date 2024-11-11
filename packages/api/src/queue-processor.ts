@@ -116,6 +116,11 @@ export const getBackendQueue = async (
       },
     },
   })
+
+  backendQueue.on('error', (error) => {
+    logger.error('[queue-processor] error', { error })
+  })
+
   await backendQueue.waitUntilReady()
   return backendQueue
 }

@@ -2371,6 +2371,7 @@ type SearchItem {
   slug: String!
   state: ArticleSavingRequestStatus
   subscription: String
+  subscriptionId: ID!
   title: String!
   unsubHttpUrl: String
   unsubMailTo: String
@@ -2741,6 +2742,7 @@ input SubscribeInput {
   isPrivate: Boolean
   subscriptionType: SubscriptionType
   url: String!
+  workspaceId: ID!
 }
 
 union SubscribeResult = SubscribeError | SubscribeSuccess

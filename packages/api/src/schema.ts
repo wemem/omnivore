@@ -1679,6 +1679,7 @@ const schema = gql`
     color: String
     labels: [Label!]
     subscription: String
+    subscriptionId: ID!
     unsubMailTo: String
     unsubHttpUrl: String
     state: ArticleSavingRequestStatus
@@ -2674,6 +2675,7 @@ const schema = gql`
   }
 
   input SubscribeInput {
+    workspaceId: ID!
     url: String!
     subscriptionType: SubscriptionType
     isPrivate: Boolean

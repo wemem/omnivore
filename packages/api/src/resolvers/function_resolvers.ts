@@ -161,7 +161,7 @@ import { recentSearchesResolver } from './recent_searches'
 import { subscriptionResolver } from './subscriptions'
 import { ResolverContext } from './types'
 import { updateEmailResolver } from './user'
-import { searchSubscriptionsResolver } from '../readease/resolvers/subscriptions'
+import { searchSubscriptionsResolver } from '../wemem/resolvers/subscriptions'
 
 /* eslint-disable @typescript-eslint/naming-convention */
 type ResultResolveType = {

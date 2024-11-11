@@ -262,10 +262,10 @@ export function getEnv(): BackendEnv {
     port: parseInt(parse('PG_PORT'), 10),
     userName: parse('PG_USER'),
     password: parse('PG_PASSWORD'),
-    dbName: parse('PG_AFFINE_DB'),
+    dbName: parse('PG_WEMEM_DB'),
     pool: {
-      max: parseInt(parse('PG_AFFINE_POOL_MAX'), 10),
-    }
+      max: parseInt(parse('PG_WEMEM_POOL_MAX'), 10),
+    },
   }
 
   const server = {

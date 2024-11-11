@@ -233,11 +233,12 @@ export const subscribeResolver = authorized<
       url: In([feedUrl, input.url]), // check both user provided url and parsed url
       user: { id: uid },
       type: SubscriptionType.Rss,
+      workspaceId: input.workspaceId,
     })
     if (existingSubscription) {
       if (existingSubscription.status === SubscriptionStatus.Active) {
         return {
-          errorCodes: [SubscribeErrorCode.AlreadySubscribed],
+          subscriptions: [existingSubscription],
         }
       }
 
@@ -274,10 +275,10 @@ export const subscribeResolver = authorized<
 
     // limit number of rss subscriptions to max
     const results = (await getRepository(Subscription).query(
-      `insert into omnivore.subscriptions (name, url, description, type, user_id, icon, is_private, fetch_content_type, folder) 
-          select $1, $2, $3, $4, $5, $6, $7, $8, $9 from omnivore.subscriptions 
+      `insert into omnivore.subscriptions (name, url, description, type, user_id, icon, is_private, fetch_content_type, folder, workspace_id) 
+          select $1, $2, $3, $4, $5, $6, $7, $8, $9, $10 from omnivore.subscriptions 
           where user_id = $5 and type = 'RSS' and status = 'ACTIVE' 
-          having count(*) < $10
+          having count(*) < $11
           returning *;`,
       [
         feed.title,
@@ -289,9 +290,10 @@ export const subscribeResolver = authorized<
         input.isPrivate,
         input.fetchContentType ?? FetchContentType.Always,
         input.folder ?? 'following',
+        input.workspaceId,
         MAX_RSS_SUBSCRIPTIONS,
       ]
-    )) as any[]
+    )) as never[]
 
     if (results.length === 0) {
       return {
