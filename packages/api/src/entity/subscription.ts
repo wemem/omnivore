@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -112,4 +113,8 @@ export class Subscription {
 
   @Column('text')
   folder?: string | null
+
+  @Column('text', { nullable: true })
+  @Index()
+  workspaceId?: string | null
 }

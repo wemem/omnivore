@@ -3077,6 +3077,7 @@ export type SearchItem = {
   slug: Scalars['String'];
   state?: Maybe<ArticleSavingRequestStatus>;
   subscription?: Maybe<Scalars['String']>;
+  subscriptionId: Scalars['ID'];
   title: Scalars['String'];
   unsubHttpUrl?: Maybe<Scalars['String']>;
   unsubMailTo?: Maybe<Scalars['String']>;
@@ -3477,6 +3478,7 @@ export type SubscribeInput = {
   isPrivate?: InputMaybe<Scalars['Boolean']>;
   subscriptionType?: InputMaybe<SubscriptionType>;
   url: Scalars['String'];
+  workspaceId: Scalars['ID'];
 };
 
 export type SubscribeResult = SubscribeError | SubscribeSuccess;
@@ -7286,6 +7288,7 @@ export type SearchItemResolvers<ContextType = ResolverContext, ParentType extend
   slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['ArticleSavingRequestStatus']>, ParentType, ContextType>;
   subscription?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  subscriptionId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   unsubHttpUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   unsubMailTo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

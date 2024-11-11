@@ -676,6 +676,7 @@ export const createSearchQueryBuilder = (
   })
 
   queryBuilder.where('library_item.user_id = :userId', { userId })
+  queryBuilder.andWhere('library_item.subscription is not null')
 
   if (!args.includePending) {
     queryBuilder.andWhere("library_item.state <> 'PROCESSING'")

@@ -1,4 +1,4 @@
-import { Job } from 'bullmq'
+import { Job, JobsOptions } from 'bullmq'
 import { DataSource } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 import { getBackendQueue, JOB_VERSION } from '../../queue-processor'
@@ -148,10 +148,18 @@ export const queueRSSRefreshFeedJob = async (
   if (!queue) {
     return undefined
   }
-  return queue.add(REFRESH_FEED_JOB_NAME, payload, {
+
+  const jobOptions: JobsOptions = {
     jobId: `${jobid}_${JOB_VERSION}`,
     priority: getJobPriority(`${REFRESH_FEED_JOB_NAME}_${options.priority}`),
     removeOnComplete: true,
     removeOnFail: true,
+  }
+
+  logger.info(`queue refresh feed job: ${jobid}`, {
+    jobOptions,
+    payload: payload as unknown as object,
   })
+
+  return queue.add(REFRESH_FEED_JOB_NAME, payload, jobOptions)
 }

@@ -68,7 +68,7 @@ const contextFunc: ContextFunction<ExpressContext, ResolverContext> = async ({
     variables: req.body.variables,
   })
 
-  const token = req?.cookies?.auth || req?.headers?.authorization
+  const token = req?.cookies?.affine_session || req?.headers?.authorization
   const claims = await getClaimsByToken(token)
 
   httpContext.set('claims', claims)

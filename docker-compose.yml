@@ -96,8 +96,8 @@ services:
       - PG_DB=omnivore
       - PG_PORT=5432
       - PG_POOL_MAX=20
-      - PG_AFFINE_DB=affine
-      - PG_AFFINE_POOL_MAX=20
+      - PG_WEMEM_DB=affine
+      - PG_WEMEM_POOL_MAX=20
       - JAEGER_HOST=jaeger
       - IMAGE_PROXY_SECRET=some-secret
       - JWT_SECRET=some_secret
@@ -134,8 +134,8 @@ services:
       - PG_DB=omnivore
       - PG_PORT=5432
       - PG_POOL_MAX=20
-      - PG_AFFINE_DB=affine
-      - PG_AFFINE_POOL_MAX=20
+      - PG_WEMEM_DB=affine
+      - PG_WEMEM_POOL_MAX=20
       - JAEGER_HOST=jaeger
       - IMAGE_PROXY_SECRET=some-secret
       - JWT_SECRET=some_secret
